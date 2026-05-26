@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R1C1 — Generative MIDI Controller by Spreadsheets Labs</title>
+
+  <!-- SEO -->
+  <meta name="description" content="R1C1 is a generative MIDI controller by Spreadsheets Labs. Algorithmic sequencing hardware for experimental music production.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://spreadsheetsmusic.com/hardware.html">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://spreadsheetsmusic.com/hardware.html">
+  <meta property="og:title" content="R1C1 — Generative MIDI Controller by Spreadsheets Labs">
+  <meta property="og:description" content="Algorithmic sequencing hardware for experimental music production.">
+  <meta property="og:image" content="https://spreadsheetsmusic.com/assets/r1c1.png">
+  <meta property="og:site_name" content="spreadsheets">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://spreadsheetsmusic.com/hardware.html">
+  <meta name="twitter:title" content="R1C1 — Generative MIDI Controller by Spreadsheets Labs">
+  <meta name="twitter:description" content="Algorithmic sequencing hardware for experimental music production.">
+  <meta name="twitter:image" content="https://spreadsheetsmusic.com/assets/r1c1.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HARDWARE PAGE OVERRIDES ──────────────────────────────── */
+    body { padding-top: 0; }
+
+    /* Full-bleed hardware hero */
+    .hw-hero {
+      min-height: 55svh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 40px 64px;
+      position: relative;
+      overflow: hidden;
+      background: var(--text);
+    }
+
+    .hw-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/grid.svg');
+      background-size: 40px 40px;
+      opacity: 0.08;
+      filter: invert(1);
+    }
+
+    .hw-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hw-hero-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .hw-hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(5rem, 16vw, 14rem);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      color: var(--bg);
+      animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hw-hero-sub {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.18em;
+      color: rgba(242, 237, 228, 0.45);
+      margin-top: 18px;
+      animation: heroReveal 1s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    /* Diagonal accent stripe across hero */
+    .hw-hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(33, 115, 70, 0.12) 100%);
+      pointer-events: none;
+    }
+
+    /* Nav variant for dark bg at top */
+    .nav-hw-top {
+      background: transparent;
+      border-bottom: none;
+    }
+
+    .nav-hw-top .nav-logo,
+    .nav-hw-top .nav-links > a,
+    .nav-hw-top .nav-socials a,
+    .nav-hw-top .ambient-btn {
+      color: rgba(242, 237, 228, 0.8);
+    }
+
+    .nav-hw-top .nav-links > a.active {
+      color: var(--accent);
+    }
+
+    .nav-hw-top .nav-links > a:hover {
+      color: var(--accent);
+    }
+
+    .nav-hw-top .nav-socials {
+      border-left-color: rgba(242, 237, 228, 0.15);
+    }
+
+    .nav-hw-top.scrolled {
+      background: rgba(28, 26, 23, 0.92);
+      border-bottom: 1px solid rgba(242, 237, 228, 0.08);
+    }
+
+    /* Product section padding */
+    .hw-product-section {
+      padding: 100px 0 80px;
+    }
+
+    /* "ADD TO CART" style status bar */
+    #status-bar .sb-ready { background: var(--accent); }
+
+    /* Hardware formula bar — shows spec data on hover */
+    #hw-spec-bar {
+      position: fixed;
+      top: 58px;
+      left: 0; right: 0;
+      z-index: 90;
+      background: rgba(242, 237, 228, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      height: 32px;
+      opacity: 0;
+      transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+
+    #hw-spec-bar.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .hw-spec-ref {
+      padding: 0 12px;
+      min-width: 52px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+
+    .hw-spec-fx {
+      padding: 0 12px;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-style: italic;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .hw-spec-val {
+      padding: 0 16px;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── CUSTOM CURSOR ──────────────────────────────────── -->
+  <div class="cursor" id="cursor">
+    <span class="cursor-h"></span>
+    <span class="cursor-v"></span>
+  </div>
+
+  <!-- ── HW SPEC BAR (formula bar variant) ─────────────── -->
+  <div id="hw-spec-bar" aria-hidden="true">
+    <span class="hw-spec-ref" id="hwSpecRef">B1</span>
+    <span class="hw-spec-fx">fx</span>
+    <span class="hw-spec-val" id="hwSpecVal">=SPEC("", "")</span>
+  </div>
+
+  <!-- ── NAV ─────────────────────────────────────────────── -->
+  <nav class="nav nav-hw-top" id="nav">
+    <a class='nav-logo' href='/'>spreadsheets</a>
+    <div class="nav-links">
+      <a href='/'>music</a>
+      <a class='active' href='/hardware' style='color: var(--accent);'>hardware</a>
+      <div class="nav-socials">
+        <a href="https://open.spotify.com/artist/2tEwhtbQ13QvuhsFPMmd6G" target="_blank" aria-label="Spotify">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" aria-label="Bandcamp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HARDWARE HERO ────────────────────────────────────── -->
+  <section class="hw-hero">
+    <div class="hw-hero-grid"></div>
+    <div class="hw-hero-content">
+      <span class="hw-hero-label">Spreadsheets Labs — B1</span>
+      <h1 class="hw-hero-title">R1C1</h1>
+      <span class="hw-hero-sub">Generative MIDI Controller · $249 USD · In Stock</span>
+    </div>
+  </section>
+
+  <!-- ── PRODUCT SECTION ─────────────────────────────────── -->
+  <section class="hw-product-section" id="product">
+
+    <!-- ── Product hero row ─────────────────────────────── -->
+    <div class="hardware-grid">
+      <div class="hardware-image reveal">
+        <div class="hardware-img-placeholder">
+          <img src="assets/r1c1.png" alt="The R1C1 Generative MIDI Controller by Spreadsheets Labs">
+        </div>
+      </div>
+
+      <div class="hardware-info reveal">
+        <p class="hw-brand">Spreadsheets Labs</p>
+        <h2 class="hardware-title">The R1C1</h2>
+        <p class="hw-subtitle">Generative MIDI Controller</p>
+        <p class="hw-tagline">"Outsource your music theory.<br>Calculate your sound."</p>
+        <p class="hardware-desc">A boutique, standalone MIDI controller that treats complex music theory like spreadsheet data. Map lush jazz chords, neo-soul voicings, and exotic scales to a 16-key mechanical grid — and dynamically expand your harmonies using the physical Spreader fader. High-end corporate leisure for your DAW.</p>
+
+        <div class="hardware-specs">
+          <div class="spec-row" data-spec-ref="B2" data-spec-label="BRAIN" data-spec-val="Dual-core RP2040 · zero-latency">
+            <span class="spec-label">BRAIN</span>
+            <span class="spec-value">Dual-core RP2040 · zero-latency</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B3" data-spec-label="KEYS" data-spec-val="16× hot-swap mechanical + NeoPixel RGB">
+            <span class="spec-label">KEYS</span>
+            <span class="spec-value">16× hot-swap mechanical + NeoPixel RGB</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B4" data-spec-label="FADER" data-spec-val="100mm smooth-glide potentiometer">
+            <span class="spec-label">FADER</span>
+            <span class="spec-value">100mm smooth-glide potentiometer</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B5" data-spec-label="DISPLAY" data-spec-val="128×32 monochrome OLED">
+            <span class="spec-label">DISPLAY</span>
+            <span class="spec-value">128×32 monochrome OLED</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B6" data-spec-label="CONNECT" data-spec-val="USB-C + TX/RX UART MIDI · plug & play">
+            <span class="spec-label">CONNECT</span>
+            <span class="spec-value">USB-C + TX/RX UART MIDI · plug &amp; play</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B7" data-spec-label="SCALES" data-spec-val="13 included · Major → Hirajoshi">
+            <span class="spec-label">SCALES</span>
+            <span class="spec-value">13 included · Major → Hirajoshi</span>
+          </div>
+          <div class="spec-row" data-spec-ref="B8" data-spec-label="VOICINGS" data-spec-val="10 modes incl. So What + Spreadsheets">
+            <span class="spec-label">VOICINGS</span>
+            <span class="spec-value">10 modes incl. So What + Spreadsheets</span>
+          </div>
+        </div>
+
+        <div class="hardware-cta">
+          <span class="hardware-price">$249 <span class="price-currency">USD</span></span>
+          <a href="#" class="btn-buy">→ buy now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Key features table ───────────────────────────── -->
+    <div class="features-section">
+      <div class="features-header-row reveal">
+        <span class="section-label" style="padding: 0 40px;">KEY FEATURES</span>
+      </div>
+      <div class="features-table">
+
+        <div class="features-col-labels" aria-hidden="true">
+          <span>#</span>
+          <span>FEATURE</span>
+          <span>DESCRIPTION</span>
+        </div>
+
+        <div class="feature-row reveal">
+          <span class="feat-num">01</span>
+          <h3 class="feat-name">The Spreader Fader</h3>
+          <p class="feat-desc">A physical 100mm slider that controls harmonic density in real-time. Push it up and instantly layer 7ths, 9ths, and vast octave extensions onto whatever chord you're holding. Pull it back for clean triads.</p>
+        </div>
+
+        <div class="feature-row reveal" data-delay-feat="1">
+          <span class="feat-num">02</span>
+          <h3 class="feat-name">Intelligent RGB Feedback</h3>
+          <p class="feat-desc">The 16-key grid is color-coded by chord quality in real-time. Gold = Major. Cyan = Minor. Red = Diminished. Pink = 7ths. See the emotional map of your entire progression before you press a single key.</p>
+        </div>
+
+        <div class="feature-row reveal" data-delay-feat="2">
+          <span class="feat-num">03</span>
+          <h3 class="feat-name">The Flight Deck Display</h3>
+          <p class="feat-desc">A crisp 128×32 OLED shows your current settings at idle. Strike any key and it instantly flashes the active chord name — C Maj7, F# Min9, Bb Dom13 — so you always know exactly where you are.</p>
+        </div>
+
+        <div class="feature-row reveal" data-delay-feat="3">
+          <span class="feat-num">04</span>
+          <h3 class="feat-name">Built-in Strum Engine</h3>
+          <p class="feat-desc">Emulate guitar strums or loose human timing with 3 adjustable speeds. Adds instant groove and realism to your MIDI data without ever touching a DAW.</p>
+        </div>
+
+        <div class="feature-row reveal" data-delay-feat="4">
+          <span class="feat-num">05</span>
+          <h3 class="feat-name">Dual MIDI Outputs</h3>
+          <p class="feat-desc">USB-C for Ableton, Logic, or FL Studio. TX/RX UART for controlling vintage hardware synths directly. Class-compliant — no drivers needed on Mac, Windows, or iOS. Plug in. Play.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── In the box ───────────────────────────────────── -->
+    <div class="box-section reveal">
+      <div class="box-label">
+        <span class="section-label">WHAT'S IN THE BOX</span>
+      </div>
+      <ul class="box-list">
+        <li><span class="box-qty">1×</span> R1C1 Generative MIDI Controller</li>
+        <li><span class="box-qty">1×</span> Braided USB-C to USB-A Cable (Beige)</li>
+        <li><span class="box-qty">1×</span> "Spreadsheets Labs" Asset Tag Sticker</li>
+        <li><span class="box-qty">1×</span> Quick Start Manual (heavyweight cardstock)</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <section class="section faq-section" id="faq">
+    <div class="section-header reveal">
+      <span class="section-label">C — FAQ</span>
+    </div>
+
+    <div class="faq-grid">
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>Do I need to know music theory to use this?</span>
+          <span class="faq-toggle">+</span>
+        </summary>
+        <p class="faq-a">Not at all. That is the entire point of the R1C1. Pick a key (like C) and a mood (like Minor), and every button on the grid becomes a perfectly in-tune chord. No theory required — just ears.</p>
+      </details>
+
+      <details class="faq-item reveal" data-delay-faq="1">
+        <summary class="faq-q">
+          <span>Does it produce its own sound?</span>
+          <span class="faq-toggle">+</span>
+        </summary>
+        <p class="faq-a">The R1C1 is a MIDI controller. It generates MIDI data — the sheet music — to trigger the software instruments in your DAW (Serum, Omnisphere, Logic's stock synths) or your external hardware synthesizers. No built-in speakers or synth engine.</p>
+      </details>
+
+      <details class="faq-item reveal" data-delay-faq="2">
+        <summary class="faq-q">
+          <span>Can I change octaves?</span>
+          <span class="faq-toggle">+</span>
+        </summary>
+        <p class="faq-a">Yes. Hold the Shift Key (bottom left) and turn the rotary encoder to instantly shift up or down 3 octaves. The OLED display confirms your new register immediately.</p>
+      </details>
+
+      <details class="faq-item reveal" data-delay-faq="3">
+        <summary class="faq-q">
+          <span>Is the firmware upgradable?</span>
+          <span class="faq-toggle">+</span>
+        </summary>
+        <p class="faq-a">Yes. The R1C1 mounts as a USB flash drive when you hold the Boot button on startup. Updating firmware is as simple as dragging a single .uf2 file onto the device. No software, no drivers.</p>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-logo">spreadsheets</span>
+          <span class="footer-subbrand">by Spreadsheets Labs</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://open.spotify.com/artist/2tEwhtbQ13QvuhsFPMmd6G" target="_blank">Spotify</a>
+          <a href="#">Instagram</a>
+          <a href="#">Bandcamp</a>
+          <a href="mailto:">contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 Spreadsheets Labs</span>
+        <span class="footer-tagline-sm">Outsource your music theory.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── STATUS BAR ─────────────────────────────────────── -->
+  <div id="status-bar" aria-hidden="true">
+    <span class="sb-item sb-ready" id="sbReady">IN STOCK</span>
+    <span class="sb-sep">|</span>
+    <span class="sb-item" id="sbCell">B1</span>
+    <span class="sb-sep">|</span>
+    <span class="sb-item sb-listeners">SPREADSHEETS LABS</span>
+    <span class="sb-sep">|</span>
+    <span class="sb-item sb-nowplaying" id="sbNowPlaying">R1C1 · $249 USD</span>
+    <span class="sb-sep sb-right-sep">|</span>
+    <span class="sb-item sb-sheet">SHEET2</span>
+  </div>
+
+  <script>
+    /* ── CUSTOM CURSOR ──────────────────────────────────── */
+    const cursor = document.getElementById('cursor');
+    let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+    (function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor.style.left = curX + 'px';
+      cursor.style.top  = curY + 'px';
+      requestAnimationFrame(animateCursor);
+    })();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+    /* ── NAV SCROLL STATE ───────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── SCROLL REVEAL ──────────────────────────────────── */
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── FAQ TOGGLE ─────────────────────────────────────── */
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('toggle', () => {
+        const toggle = item.querySelector('.faq-toggle');
+        if (toggle) toggle.textContent = item.open ? '−' : '+';
+      });
+    });
+
+    /* ── SPEC BAR (formula bar for spec rows) ───────────── */
+    const specBar  = document.getElementById('hw-spec-bar');
+    const specRef  = document.getElementById('hwSpecRef');
+    const specVal  = document.getElementById('hwSpecVal');
+    const sbCell   = document.getElementById('sbCell');
+
+    document.querySelectorAll('.spec-row').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        const ref   = row.dataset.specRef   || 'B1';
+        const label = row.dataset.specLabel || '';
+        const val   = row.dataset.specVal   || '';
+        specRef.textContent = ref;
+        specVal.textContent = `=SPEC("${label}", "${val}")`;
+        sbCell.textContent  = ref;
+        specBar.classList.add('visible');
+      });
+      row.addEventListener('mouseleave', () => {
+        sbCell.textContent = 'B1';
+        specBar.classList.remove('visible');
+      });
+    });
+
+    /* ── HARDWARE PARALLAX ──────────────────────────────── */
+    const hwImage = document.querySelector('.hardware-image');
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+    if (hwImage && !isTouchDevice()) {
+      window.addEventListener('scroll', () => {
+        const rect = hwImage.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+        const progress = 1 - (rect.top + rect.height) / (window.innerHeight + rect.height);
+        const shift = (progress - 0.5) * 40;
+        const inner = hwImage.querySelector('.hardware-img-placeholder, .hardware-img-inner');
+        if (inner) inner.style.transform = `translateY(${shift}px)`;
+      }, { passive: true });
+    }
+
+    /* ── 3D SPEC ROW HOVER (subtle) ─────────────────────── */
+    if (!isTouchDevice()) {
+      document.querySelectorAll('.spec-row').forEach(row => {
+        row.style.transition = 'background 0.2s ease, padding-left 0.2s ease';
+        row.addEventListener('mouseenter', () => {
+          row.style.paddingLeft = '8px';
+          row.style.background  = 'rgba(33, 115, 70, 0.04)';
+        });
+        row.addEventListener('mouseleave', () => {
+          row.style.paddingLeft = '';
+          row.style.background  = '';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
