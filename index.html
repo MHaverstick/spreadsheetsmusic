@@ -40,24 +40,24 @@
    A vintage OS that boots on the Riviera. Teal desktop, cream software.
    ========================================================================= */
 :root{
-  --desktop:#86A9AC; --desktop-2:#6E9195;
-  --paper:#FBF4E6; --paper-2:#FFFBF1; --paper-3:#F4ECD9;
-  --ink:#22425A; --ink-2:#4E6B7E; --ink-3:#8AA6B3;
-  --terra:#C8624B; --coral:#DE8A68; --peach:#E8BE95; --sun:#E8C255; --gold:#CE9A3C;
-  --azure:#5A93AE; --azure-deep:#3D7594; --sea-foam:#9DBFAE; --noir:#3E6E86; --magenta:#A87E93;
-  --shadow:#22425A; --device-key:#4E9BC4;
+  --desktop:#F2EDE4; --desktop-2:#E8E2D6;
+  --paper:#FAF7F0; --paper-2:#FFFDF8; --paper-3:#EFEAE0;
+  --ink:#1C1A17; --ink-2:#5A5348; --ink-3:#A89E8E;
+  --terra:#217346; --coral:#2F8F58; --peach:#C8BFB0; --sun:#F0C040; --gold:#D4A62E;
+  --azure:#2D7D8C; --azure-deep:#1F5E6B; --sea-foam:#8FB39B; --noir:#185C38; --magenta:#7A7060;
+  --shadow:#1C1A17; --device-key:#4E9BC4;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;background:#96B2B2;}
+html{scroll-behavior:smooth;background:#F2EDE4;}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
 body{font-family:Geneva,Tahoma,Verdana,Arial,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;
-  background:linear-gradient(180deg,#96B2B2 0%,#AEBFAE 13%,#C6C3A3 26%,#DFC896 41%,#E5B98A 56%,#D69E7B 71%,#B9836E 86%,#8E6B62 100%) no-repeat;
+  background:#F2EDE4;
   background-size:100% 100%;background-attachment:scroll;}
 
 /* desktop stipple */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(45deg,rgba(0,0,0,.07) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.07) 75%),linear-gradient(45deg,rgba(0,0,0,.07) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.07) 75%);
-  background-size:6px 6px;background-position:0 0,3px 3px;opacity:.3;}
+  background-image:linear-gradient(to right,rgba(28,26,23,.5) 0 1px,transparent 1px 100%),linear-gradient(to bottom,rgba(28,26,23,.5) 0 1px,transparent 1px 100%);
+  background-size:30px 30px;opacity:.09;}
 
 /* CRT scanlines — static, no flicker */
 .crt{position:fixed;inset:0;z-index:998;pointer-events:none;
@@ -75,9 +75,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
 /* ---------- WINDOW CHROME ---------- */
 .window{background:var(--paper-2);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);position:relative;}
 .titlebar{border-bottom:2px solid var(--ink);min-height:24px;display:flex;align-items:center;gap:8px;padding:3px 6px;
-  background:repeating-linear-gradient(to bottom,var(--ink) 0 1px,transparent 1px 3px);position:relative;}
-.titlebar.active-azure{background:repeating-linear-gradient(to bottom,var(--azure) 0 1px,transparent 1px 3px),var(--azure-deep);}
-.titlebar.active-mag{background:repeating-linear-gradient(to bottom,var(--magenta) 0 1px,transparent 1px 3px),#6f2f5d;}
+  background:var(--ink);position:relative;}
+.titlebar.active-azure{background:var(--terra);}
+.titlebar.active-mag{background:var(--azure-deep);}
 .titlebar.active-azure,.titlebar.active-mag{border-bottom-color:var(--ink);}
 .titlebar .close,.titlebar .zoom{width:13px;height:13px;background:var(--paper-2);border:2px solid var(--ink);flex:0 0 auto;}
 .titlebar .ttl{font-family:'Silkscreen',monospace;font-size:9px;text-transform:uppercase;background:var(--paper-2);padding:3px 8px;color:var(--ink);letter-spacing:.04em;border:1px solid var(--ink);line-height:1;display:inline-flex;align-items:center;gap:6px;}
@@ -101,8 +101,8 @@ section{position:relative;z-index:1;}
 .band{padding:54px 0;}
 .section-win{position:relative;}
 .winbody{padding:34px 36px;}
-.winbody.tint-azure{background:var(--azure);color:var(--ink);}
-.winbody.tint-mag{background:var(--magenta);color:var(--ink);}
+.winbody.tint-azure{background:#E3EAE4;color:var(--ink);}
+.winbody.tint-mag{background:#EBE5D7;color:var(--ink);}
 .eyebrow{font-family:'Silkscreen',monospace;font-size:10px;text-transform:uppercase;color:var(--terra);letter-spacing:.08em;margin-bottom:14px;display:inline-block;border-bottom:2px solid var(--terra);padding-bottom:4px;}
 .tint-azure .eyebrow,.tint-mag .eyebrow{color:var(--ink);border-color:var(--ink);}
 h2.sec{font-weight:400;font-size:clamp(26px,4.6vw,46px);line-height:1.05;letter-spacing:0;margin-bottom:12px;}
@@ -150,6 +150,7 @@ body.js .stagger.in>*{opacity:1!important;transform:none!important;}
 
 /* ---------- HERO ---------- */
 #top{position:relative;overflow:hidden;}
+.sun-big,.hero-ocean,.sun-reflect,.palm,.sky{display:none!important;}
 .sky{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#5FC8E0 0%,#9ADBD6 24%,#FBD667 50%,#F8A878 70%,#F58FA0 100%);}
 .sun-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:280px;height:280px;border-radius:50%;z-index:0;background:radial-gradient(circle at 50% 42%,#F6E4B4 0%,#E3BE6A 40%,#D69A57 70%,#BE7154 100%);box-shadow:0 0 0 8px rgba(214,154,87,.2),0 0 80px rgba(214,154,87,.4);}
 .hero-ocean{position:absolute;left:0;right:0;bottom:0;height:26%;z-index:1;background:linear-gradient(180deg,#7FA3A8 0%,#4E7385 100%);border-top:2px solid var(--ink);overflow:hidden;}
@@ -248,6 +249,17 @@ body.js .stagger.in>*{opacity:1!important;transform:none!important;}
 .key:nth-child(n+9):nth-child(-n+12)::after{opacity:.6;}
 .key.shift::after{filter:blur(5px);}
 .fader-glow{background:linear-gradient(to top,#A8503F,#B79452 48%,#6E9A6B 76%,var(--device-key));}
+
+/* ---------- EXCEL STATUS BAR ---------- */
+.statusbar{position:fixed;left:0;right:0;bottom:0;z-index:900;height:26px;display:flex;align-items:center;gap:0;
+  background:var(--paper-2);border-top:2px solid var(--ink);font-family:'Space Mono',monospace;font-size:10px;color:var(--ink-2);
+  padding:0 12px;box-shadow:0 -2px 0 rgba(0,0,0,.15);}
+.statusbar .sb{padding:0 12px;border-right:1px solid var(--peach);white-space:nowrap;}
+.statusbar .sb:first-child{padding-left:0;color:var(--terra);font-weight:700;letter-spacing:.06em;}
+.statusbar .sb.last{margin-left:auto;border-right:0;padding-right:0;}
+@media (max-width:700px){.statusbar .sb.hide-sm{display:none;}}
+body{padding-bottom:26px;}
+.scrollprog{bottom:26px;}
 .fader-cap-lab{font-family:'Silkscreen',monospace;font-size:5.5px;color:var(--ink-2);letter-spacing:.06em;writing-mode:vertical-rl;opacity:.7;}
 .ports{display:flex;justify-content:center;gap:18px;margin-top:14px;}
 .port{display:flex;align-items:center;gap:5px;font-family:'Silkscreen',monospace;font-size:6px;color:var(--ink-2);letter-spacing:.08em;}
@@ -443,7 +455,7 @@ body.js .stagger.in>*{opacity:1!important;transform:none!important;}
 .player .meter i{width:10px;height:18px;border:1.5px solid var(--ink);background:#2a2018;transition:background .12s;}
 .player-foot{display:flex;align-items:center;gap:10px;border-top:2px solid var(--ink);padding:9px 14px;background:var(--paper-3);}
 .player-foot label{font-family:'Silkscreen',monospace;font-size:7px;letter-spacing:.06em;color:var(--ink-2);}
-.player .spread{-webkit-appearance:none;appearance:none;flex:1;height:14px;border:2px solid var(--ink);border-radius:9px;background:linear-gradient(90deg,#2E7DA1,#D29A36,#9A4B83);outline:none;}
+.player .spread{-webkit-appearance:none;appearance:none;flex:1;height:14px;border:2px solid var(--ink);border-radius:9px;background:linear-gradient(90deg,#217346,#D4A62E,#2D7D8C);outline:none;}
 .player .spread::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:22px;background:var(--paper-2);border:2px solid var(--ink);border-radius:4px;cursor:grab;}
 .player .spread::-moz-range-thumb{width:14px;height:22px;background:var(--paper-2);border:2px solid var(--ink);border-radius:4px;cursor:grab;}
 .player .mute{font-family:'Space Mono',monospace;font-size:11px;border:1.5px solid var(--ink);background:var(--paper-2);border-radius:5px;padding:2px 8px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);}
@@ -955,6 +967,13 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
     </div>
   </div>
 </section>
+<div class="statusbar" aria-hidden="true">
+  <span class="sb">READY</span>
+  <span class="sb">A1</span>
+  <span class="sb hide-sm">MODEL R1C1</span>
+  <span class="sb hide-sm">16 KEYS &middot; 14 BANKS</span>
+  <span class="sb last">SHEET1</span>
+</div>
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -1047,19 +1066,19 @@ var THEMES=[
    S('Locrian','Unstable and tense. Use sparingly.',[0,1,3,5,6,8,10]),
  ]},
  {key:'chill',name:'Chill & Lounge',sub:'Low tempo, late afternoon',icon:'#ic-folder',col:'#7FA98F',items:[
-   B('LOFI LOUNGE','LOFI','Dorian','Dusty ninths and thirteenths for a beat that never gets out of the chair.',['m9','13'],[0,3,7,10,14],'#5CC2A4'),
-   B('SUNSET DRIVE','SUNSET','Minor','Synthwave cruising chords — minor sevenths with the top down.',['m7','m9'],[0,3,7,10,14],'#7FB7C9'),
-   B('ETHEREAL DRIFT','ETHER','Lydian','Weightless maj7 and add9 pads that hang in the air.',['maj7','add9'],[0,4,7,11,18],'#8FD4E8'),
-   B('ST BARTS DUB','DUB','Minor','Yacht reggae — m7 and maj7 clamped mid-register so nothing rocks the boat.',['m7','maj7'],[0,3,7,10],'#56C2A4'),
+   B('LOFI LOUNGE','LOFI','Dorian','Dusty ninths and thirteenths for a beat that never gets out of the chair.',['m9','13'],[0,3,7,10,14],'#6E9E7F'),
+   B('SUNSET DRIVE','SUNSET','Minor','Synthwave cruising chords — minor sevenths with the top down.',['m7','m9'],[0,3,7,10,14],'#5E8E97'),
+   B('ETHEREAL DRIFT','ETHER','Lydian','Weightless maj7 and add9 pads that hang in the air.',['maj7','add9'],[0,4,7,11,18],'#85A9A8'),
+   B('ST BARTS DUB','DUB','Minor','Yacht reggae — m7 and maj7 clamped mid-register so nothing rocks the boat.',['m7','maj7'],[0,3,7,10],'#4E8E72'),
  ]},
  {key:'dance',name:'Dancefloor',sub:'House, Italo, Balearic',icon:'#ic-folder',col:'#A2809A',items:[
-   B('RIVIERA TOUCH','RIVIERA','Dorian','French house — dense m9 and maj7 voicings stacked like deck chairs at the Eden-Roc.',['m9','maj7'],[0,3,7,10,14],'#4FB3DE'),
+   B('RIVIERA TOUCH','RIVIERA','Dorian','French house — dense m9 and maj7 voicings stacked like deck chairs at the Eden-Roc.',['m9','maj7'],[0,3,7,10,14],'#2D7D8C'),
    B('BALEARIC SUNDOWN','BALEARIC','Lydian','Wide sus, add9 and maj9 chords spread across two octaves. The sky does the work.',['sus','add9','maj9'],[0,7,11,14,18],'#F6926A'),
-   B('MIDNIGHT ITALO','ITALO','Minor','Italo disco — triads and m7s with a doubled root and fifth for chrome-bumper thickness.',['triad','m7'],[0,7,12,16],'#B886C9'),
-   B('ACID HOUSE','ACID','Minor','Raw minor sevenths and dominant sevenths built for a 4am warehouse.',['m7','7','m9'],[0,3,7,10],'#C77FB8'),
+   B('MIDNIGHT ITALO','ITALO','Minor','Italo disco — triads and m7s with a doubled root and fifth for chrome-bumper thickness.',['triad','m7'],[0,7,12,16],'#7E7391'),
+   B('ACID HOUSE','ACID','Minor','Raw minor sevenths and dominant sevenths built for a 4am warehouse.',['m7','7','m9'],[0,3,7,10],'#8A7183'),
  ]},
  {key:'soul',name:'Soul & Jazz',sub:'Neo-soul, funk',icon:'#ic-folder',col:'#CE9A3C',items:[
-   B('NEO SOUL CHURCH','NEOSOUL','Major','Gospel-rich add9s and 13ths — the sound of a Rhodes on a Sunday.',['add9','11','13'],[0,4,7,11,14],'#EBB14A'),
+   B('NEO SOUL CHURCH','NEOSOUL','Major','Gospel-rich add9s and 13ths — the sound of a Rhodes on a Sunday.',['add9','11','13'],[0,4,7,11,14],'#D4A62E'),
    B('LINEN SNAP','LINEN','Mixolydian','Mediterranean funk — rootless dom9, 13 and ♯11 upper structures. Crisp like a pressed shirt.',['9','13','#11'],[4,10,14,21],'#F2B23D'),
  ]},
  {key:'cine',name:'Cinematic',sub:'Score, intrigue',icon:'#ic-folder',col:'#4A6E7E',items:[
@@ -1067,8 +1086,8 @@ var THEMES=[
    B('PORTOFINO NOIR','NOIR','Minor','The minor-major-seventh "Bond" chord, dim7 and m6. Order a negroni.',['mMaj7','dim7','m6'],[0,3,7,11],'#3E7E96'),
  ]},
  {key:'latin',name:'Latin',sub:'Bossa, Spanish',icon:'#ic-folder',col:'#C8624B',items:[
-   B('BOSSA MORNING','BOSSA','Major','Breezy maj7 and 6th chords with a bossa lilt. Coffee on the terrace.',['6','maj7','9'],[0,4,7,11,14],'#F7A87C'),
-   B('LATIN NIGHTS','LATIN','Phrygian','Phrygian sevenths with Spanish heat — flamenco after dark.',['7','9'],[0,4,7,10,13],'#F0795E'),
+   B('BOSSA MORNING','BOSSA','Major','Breezy maj7 and 6th chords with a bossa lilt. Coffee on the terrace.',['6','maj7','9'],[0,4,7,11,14],'#C08A63'),
+   B('LATIN NIGHTS','LATIN','Phrygian','Phrygian sevenths with Spanish heat — flamenco after dark.',['7','9'],[0,4,7,10,13],'#B05F47'),
  ]},
 ];
 (function(){
