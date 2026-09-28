@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://spreadsheetsmusic.com/">
 <meta property="og:title" content="R1C1 — 16-Key Chord Computer by Spreadsheets Corp.">
 <meta property="og:description" content="Outsource your music theory. Algorithmic chords, arps and sequencing in four controls, no menus.">
-<meta property="og:image" content="https://spreadsheetsmusic.com/assets/r1c1-film-poster.jpg">
+<meta property="og:image" content="https://spreadsheetsmusic.com/assets/unit-grid.jpg">
 <meta property="og:site_name" content="spreadsheets">
 
 <!-- Twitter / X Card -->
@@ -23,7 +23,7 @@
 <meta name="twitter:url" content="https://spreadsheetsmusic.com/">
 <meta name="twitter:title" content="R1C1 — 16-Key Chord Computer by Spreadsheets Corp.">
 <meta name="twitter:description" content="Outsource your music theory. Algorithmic chords, arps and sequencing in four controls, no menus.">
-<meta name="twitter:image" content="https://spreadsheetsmusic.com/assets/r1c1-film-poster.jpg">
+<meta name="twitter:image" content="https://spreadsheetsmusic.com/assets/unit-grid.jpg">
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -490,11 +490,16 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
   .hero-inner{padding:30px 0 46px;}
   .hero-win-body{padding:20px 18px 22px;}
 }
-/* ---------- FILM ---------- */
-.filmbox{border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);background:#000;line-height:0;margin-top:6px;}
-.filmbox video{width:100%;height:auto;display:block;}
-.film-cap{font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-2);margin-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-.film-cap b{color:var(--terra);}
+/* ---------- THE UNIT ---------- */
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px;}
+.shots figure{margin:0;}
+.shots img{width:100%;height:auto;display:block;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--shadow);background:var(--paper-3);}
+.shots figcaption{font-family:'Silkscreen',monospace;font-size:7px;letter-spacing:.06em;color:var(--ink-2);margin-top:7px;line-height:1.5;}
+@media (max-width:640px){.shots{grid-template-columns:1fr;gap:16px;}}
+.listen{margin-top:20px;border:2px solid var(--ink);background:var(--paper-3);padding:13px 14px;box-shadow:4px 4px 0 var(--shadow);}
+.listen-lab{font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-2);margin-bottom:10px;}
+.listen-lab b{color:var(--terra);}
+.listen audio{width:100%;height:34px;display:block;}
 /* ---------- DESK STILL ---------- */
 .deskshot{width:100%;height:auto;display:block;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--shadow);margin-bottom:22px;}
 /* ---------- RECORDS ---------- */
@@ -543,7 +548,7 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
   <div class="brand"><span class="sun"></span> Spreadsheets&nbsp;Corp.</div>
   <nav>
     <a href="#about">Why</a><a href="#play">How It Works</a><a href="#anatomy">Hardware</a>
-    <a href="#banks">Banks</a><a href="#records">Records</a><a href="#maker">Maker</a><a href="#reference">Reference</a>
+    <a href="#banks">Banks</a><a href="#unit">The&nbsp;Unit</a><a href="#records">Records</a><a href="#maker">Maker</a><a href="#reference">Reference</a>
   </nav>
   <div class="clock" id="clock"><svg class="kare"><use href="#ic-watch"/></svg> <span id="clocktxt">—:—</span></div>
 </div>
@@ -603,22 +608,24 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
 </section>
 
 <!-- MEMO -->
-<!-- FILM -->
-<section class="band" id="film">
+<!-- THE UNIT -->
+<section class="band" id="unit">
   <div class="wrap">
     <div class="window section-win reveal" style="max-width:720px;margin:0 auto;">
-      <div class="titlebar"><span class="close"></span><span class="ttl"><svg class="kare"><use href="#ic-mac"/></svg> R1C1 &mdash; Demonstration</span><span class="grow"></span><span class="zoom"></span></div>
+      <div class="titlebar"><span class="close"></span><span class="ttl"><svg class="kare"><use href="#ic-mac"/></svg> R1C1 &mdash; Photographs</span><span class="grow"></span><span class="zoom"></span></div>
       <div class="winbody">
-        <span class="eyebrow">Sound on</span>
-        <h2 class="sec">This is the unit playing.</h2>
-        <p>No library music, no sequencer. Twenty-one seconds recorded straight off the hardware &mdash; every chord you hear is one key being pressed.</p>
-        <div class="filmbox">
-          <video controls playsinline preload="none" poster="assets/r1c1-film-poster.jpg" width="1080" height="1080">
-            <source src="assets/r1c1-film.mp4" type="video/mp4">
-            Your browser can&rsquo;t play this video.
-          </video>
+        <span class="eyebrow">The actual unit</span>
+        <h2 class="sec">One of one, printed and wired by hand.</h2>
+        <p>Not a render. This is the working prototype &mdash; cream PLA, blank caps, RGB under every key, and a 128&times;128 OLED showing the eight settings as a spreadsheet.</p>
+        <div class="shots">
+          <figure><img src="assets/unit-grid.jpg" alt="The R1C1 from above with every key lit a different colour and the OLED showing SCL MIXOLY, ROOT C, VEL 90, BPM 120." width="1000" height="1000" loading="lazy"><figcaption>Sixteen keys, lit by bank</figcaption></figure>
+          <figure><img src="assets/unit-screen.jpg" alt="Close-up of the R1C1 OLED showing SCALE Mixolydian, ROOT C, BANK, INV 0, VEL 90, STRUM Off, BPM 120, CHORD Spread." width="1000" height="1000" loading="lazy"><figcaption>The eight settings, on the deck</figcaption></figure>
+          <figure><img src="assets/unit-hero.jpg" alt="The R1C1 on a glass desk in low sun, showing the vent slots, encoder knob and the slider channel." width="1000" height="1000" loading="lazy"><figcaption>Vents, encoder, slider channel</figcaption></figure>
         </div>
-        <div class="film-cap"><span>FILE <b>R1C1.MOV</b> &middot; 21.4s &middot; 1080&times;1080</span><span>Audio: the real unit, one take</span></div>
+        <div class="listen">
+          <div class="listen-lab"><b>Hear it.</b> 21 seconds, recorded straight off the unit &mdash; no library music, no sequencer.</div>
+          <audio controls preload="none" src="assets/r1c1-audio.m4a"></audio>
+        </div>
       </div>
     </div>
   </div>
