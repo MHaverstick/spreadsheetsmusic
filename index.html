@@ -150,16 +150,16 @@ body.js .stagger.in>*{opacity:1!important;transform:none!important;}
 
 /* ---------- HERO ---------- */
 #top{position:relative;overflow:hidden;}
-.sun-big,.hero-ocean,.sun-reflect,.palm,.sky{display:none!important;}
-.sky{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#5FC8E0 0%,#9ADBD6 24%,#FBD667 50%,#F8A878 70%,#F58FA0 100%);}
-.sun-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:280px;height:280px;border-radius:50%;z-index:0;background:radial-gradient(circle at 50% 42%,#F6E4B4 0%,#E3BE6A 40%,#D69A57 70%,#BE7154 100%);box-shadow:0 0 0 8px rgba(214,154,87,.2),0 0 80px rgba(214,154,87,.4);}
-.hero-ocean{position:absolute;left:0;right:0;bottom:0;height:26%;z-index:1;background:linear-gradient(180deg,#7FA3A8 0%,#4E7385 100%);border-top:2px solid var(--ink);overflow:hidden;}
-.hero-ocean::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.16) 0 1px,transparent 1px 7px);}
-.hero-ocean .sun-reflect{position:absolute;left:50%;top:0;bottom:0;width:74px;transform:translateX(-50%);background:linear-gradient(180deg,rgba(232,194,85,.55),rgba(232,194,85,0));mix-blend-mode:screen;}
-.palm{position:absolute;bottom:0;color:var(--ink);z-index:1;pointer-events:none;opacity:.55;}
-.palm-l{left:-20px;width:152px;height:252px;opacity:.92;}
-.palm-r{right:-14px;width:112px;height:186px;opacity:.85;transform:scaleX(-1);}
-@media(max-width:760px){.palm-r{display:none;}.palm-l{width:104px;height:172px;left:-22px;opacity:.85;}.hero-ocean{height:20%;}}
+
+
+
+
+
+
+
+
+
+@media(max-width:760px){}
 .sea{position:absolute;left:0;right:0;bottom:0;height:30%;z-index:0;background:repeating-linear-gradient(to bottom,rgba(34,66,90,0) 0 2px,rgba(34,66,90,.10) 2px 3px),linear-gradient(180deg,rgba(245,143,160,.28),rgba(63,169,212,.6));}
 .hero-inner{position:relative;z-index:2;padding:42px 0 64px;}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;}
@@ -398,8 +398,8 @@ body{padding-bottom:26px;}
 .vmap-lab{font-family:'Silkscreen',monospace;font-size:6px;color:var(--ink-3);margin-top:5px;letter-spacing:.05em;text-transform:uppercase;}
 /* MAKER — business card */
 #maker{position:relative;overflow:hidden;}
-.palm-maker{left:6px;bottom:24px;width:96px;height:158px;opacity:.45;z-index:0;}
-@media(max-width:900px){.palm-maker{display:none;}}
+
+@media(max-width:900px){}
 .vcard{display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:start;margin-top:6px;}
 @media(max-width:560px){.vcard{grid-template-columns:1fr;}}
 .vcard .avatar{width:130px;height:130px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--shadow);background:linear-gradient(160deg,#FBD24E 0%,#F7A188 52%,#C492CE 100%);position:relative;overflow:hidden;}
@@ -555,10 +555,10 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
 
 <!-- HERO -->
 <section id="top">
-  <div class="sun-big"></div>
-  <div class="hero-ocean" aria-hidden="true"><span class="sun-reflect"></span></div>
-  <svg class="palm palm-l" aria-hidden="true"><use href="#ic-palm"/></svg>
-  <svg class="palm palm-r" aria-hidden="true"><use href="#ic-palm"/></svg>
+  
+  
+  
+  
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div class="window hero-win">
@@ -922,7 +922,7 @@ footer .colophon .pixel{color:var(--peach);font-size:9px;}
 <!-- MAKER -->
 <section class="band" id="maker">
   <div class="wrap">
-    <svg class="palm palm-maker" aria-hidden="true"><use href="#ic-palm"/></svg>
+    
     <div class="window section-win reveal from-right" style="max-width:720px;margin:0 auto;">
       <div class="titlebar active-azure"><span class="close"></span><span class="ttl"><svg class="kare"><use href="#ic-mac"/></svg> Get Info — Mike</span><span class="grow"></span><span class="zoom"></span></div>
       <div class="winbody">
